@@ -6,7 +6,7 @@
 /*   By: admansar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:21:19 by admansar          #+#    #+#             */
-/*   Updated: 2023/01/11 17:33:26 by admansar         ###   ########.fr       */
+/*   Updated: 2023/01/11 23:40:03 by admansar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void han(int sig_num, siginfo_t *a, void *nothing)
 		}
 }
 
-int main()
+int main(void)
 {
 	struct sigaction action;
 	int c = getpid();

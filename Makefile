@@ -12,36 +12,26 @@ OBJ1 = server
 
 OBJ2 = client
 
-OBJ = binary.o
-
 AR = ar rcs
+
 RM = rm -rf
 
-all : $(NAME) x
+all : $(OBJ1) $(OBJ2) 
 
-make_libft : 
-	cd libft/ && make
-	cd ..
+$(NAME) : all
 
-$(NAME) : $(OBJ) 
-	$(RM) libft/libft.a
-	$(AR) $(NAME) $(OBJ) libft/*.o
+$(OBJ1) : 
+	$(CC) $(CFLAGS) libft.a binary.c $(SRC1) -o $(OBJ1)
 
-x : 
-	$(CC) $(CFLAGS) $(NAME) $(SRC1) -o $(OBJ1)
-	$(CC) $(CFLAGS) $(NAME) $(SRC2) -o $(OBJ2)
+$(OBJ2) : 
+	$(CC) $(CFLAGS) libft.a binary.c $(SRC2) -o $(OBJ2)
+
 
 clean : 
-	$(RM) *.o
-	cd libft/
-	$(RM) *.o $(OBJ1) $(OBJ2)
-	cd ..
+	@echo "cleaned"
+
 fclean : clean
-	cd libft && make fclean
-	$(RM) $(NAME) $(OBJ1) $(OBJ2)
+	@$(RM) $(NAME) $(OBJ1) $(OBJ2)
+	@echo "fully"
 
-re_libft :
-	cd libft/ && make re
-	cd ..
-
-re : re_libft all
+re : fclean all
