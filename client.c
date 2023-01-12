@@ -6,20 +6,25 @@
 /*   By: admansar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:37:42 by admansar          #+#    #+#             */
-/*   Updated: 2023/01/11 23:05:03 by admansar         ###   ########.fr       */
+/*   Updated: 2023/01/12 13:20:02 by admansar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
-	int i = 0;
-	if (ac == 2)
+	int	i;
+
+	i = 0;
+	if (ac != 3)
+	{
+		ft_putstr_fd("\033[0;31myou should use 3 argument\n", 1);
 		exit(0);
+	}
 	while (av[2][i])
 	{
-		to_binary(av[2][i], atoi(av[1]));
+		to_binary(av[2][i], ft_atoi(av[1]));
 		i++;
 	}
 	return (0);

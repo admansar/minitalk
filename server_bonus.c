@@ -1,17 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   server.c                                           :+:      :+:    :+:   */
+/*   server_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: admansar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/09 17:21:19 by admansar          #+#    #+#             */
-/*   Updated: 2023/01/12 12:41:14 by admansar         ###   ########.fr       */
+/*   Created: 2023/01/12 13:24:26 by admansar          #+#    #+#             */
+/*   Updated: 2023/01/12 18:05:09 by admansar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
-//#include <sys/siginfo.h>
 
 int	ft_pow(int c, unsigned int b)
 {
@@ -44,12 +43,19 @@ char	binary_to_decimal(char *s)
 	return (b);
 }
 
-void	bruh(int *i, char *str, char decimal)
+void	bruh(int *i, char *str, char decimal, int remember)
 {
+	int	j;
+
+	j = 0;
 	str[8] = '\0';
 	decimal = binary_to_decimal(str);
 	write(1, &decimal, 1);
 	(*i) = 0;
+	while (str[j] == '0')
+		j++;
+	if (j == 8)
+		kill(remember, SIGUSR1);
 }
 
 void	han(int sig_num, siginfo_t *a, void *nothing)
@@ -74,7 +80,9 @@ void	han(int sig_num, siginfo_t *a, void *nothing)
 		str[i] = '1';
 	i++;
 	if (i == 8)
-		bruh (&i, str, 0);
+	{
+		bruh(&i, str, 0, remember);
+	}
 }
 
 int	main(void)
